@@ -77,7 +77,7 @@ app.delete('/notes/:id', (req, res) => {
       process.exit(1)
     }
     const notes = db.collection('notes')
-    notes.delete({id: req.params.id}, (err, result) => {
+    notes.deleteOne({id: req.params.id}, (err, result) => {
       if (err) {
         console.error(err)
         res.sendStatus(500)
