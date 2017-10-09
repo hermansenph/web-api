@@ -22,6 +22,7 @@ app.get('/notes', (req, res) => {
       else {
         res.send(result)
       }
+      db.close()
     })
   })
 })
@@ -42,8 +43,29 @@ app.post('/notes', (req, res) => {
       else {
         res.sendStatus(201)
       }
+      db.close()
     })
-    db.close()
+  })
+})
+
+app.put('/notes/:id', (req, res) => {
+  MongoClient.connect('mongodb://localhost/notes-app', (err, db) => {
+    if (err) {
+      console.error(err)
+      res.sendStatus(500)
+      process.exit(1)
+    }
+    const notes = db.collection('notes')
+    notes.update({id: req.params.id}, {$set: req.body}, (err, result) => {
+      if (err) {
+        console.error(err)
+        res.sendStatus(500)
+      }
+      else {
+        res.send(result)
+      }
+      db.close()
+    })
   })
 })
 
