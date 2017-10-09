@@ -22,8 +22,8 @@ app.get('/notes', (req, res) => {
       else {
         res.send(result)
       }
+      db.close()
     })
-    db.close()
   })
 })
 
@@ -43,8 +43,8 @@ app.post('/notes', (req, res) => {
       else {
         res.sendStatus(201)
       }
+      db.close()
     })
-    db.close()
   })
 })
 
@@ -64,8 +64,8 @@ app.put('/notes/:id', (req, res) => {
       else {
         res.send(result)
       }
+      db.close()
     })
-    db.close()
   })
 })
 
